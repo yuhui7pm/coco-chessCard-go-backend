@@ -2,11 +2,11 @@ package main
 
 import (
 	"common/config"
+	"common/logs"
 	"common/metrics"
 	"context"
 	"flag"
 	"fmt"
-	"log"
 	"os"
 	"user/app"
 )
@@ -30,7 +30,7 @@ func main() {
 	// 3. 启动GRPC服务
 	err := app.Run(context.Background())
 	if err != nil {
-		log.Println(err)
+		logs.Print(err.Error())
 		// 非零状态码：通常用来表示程序出现了错误或异常情况。
 		// 零状态码：通常用来表示程序正常退出。
 		os.Exit(-1)
