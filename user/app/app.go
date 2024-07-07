@@ -5,6 +5,7 @@ import (
 	"common/discovery"
 	"common/logs"
 	"context"
+	"core/repo"
 	"fmt"
 	"google.golang.org/grpc"
 	"net"
@@ -37,6 +38,8 @@ func Run(ctx context.Context) error {
 		}
 
 		// 初始化数据库操作
+		manger := repo.New()
+
 		// 阻塞进程
 		err = server.Serve(lis)
 		if err != nil {
