@@ -13,6 +13,8 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
+	"user/internal/service"
+	"user/pb"
 )
 
 // 启动程序 grpc http服务 启用日志 启用数据库
@@ -39,6 +41,7 @@ func Run(ctx context.Context) error {
 		}
 
 		// 初始化数据库操作
+		pb.RegisterUserServiceServer(server, service.NewAccountService(manger))
 
 		// 阻塞进程
 		err = server.Serve(lis)
